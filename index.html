@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CI/CD Kubernetes Auto Scaling Demo</title>
+<style>
+    body {
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        background: linear-gradient(135deg, #1d2671, #c33764);
+        color: white;
+        text-align: center;
+    }
+    h1 {
+        margin-top: 40px;
+        font-size: 3em;
+    }
+    p {
+        font-size: 1.2em;
+    }
+    .container {
+        margin-top: 50px;
+    }
+    button {
+        padding: 18px 35px;
+        font-size: 18px;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        margin: 15px;
+        transition: 0.3s ease;
+    }
+    .stress {
+        background: #ff3c3c;
+        color: white;
+        box-shadow: 0 0 15px rgba(255,0,0,0.7);
+    }
+    .stress:hover {
+        background: #ff0000;
+    }
+    .relax {
+        background: #00ffcc;
+        color: #003333;
+        box-shadow: 0 0 15px rgba(0,255,204,0.7);
+    }
+    .relax:hover {
+        background: #00ccaa;
+    }
+    footer {
+        margin-top: 60px;
+        font-size: 14px;
+        opacity: 0.8;
+    }
+</style>
+</head>
+
+<body>
+
+<h1>🚀 CI/CD Kubernetes Auto-Scaling Demo</h1>
+<p>Stress → Auto Scale Pods | Relax → Auto Reduce Pods</p>
+
+<div class="container">
+    <button class="stress" onclick="startStress()">🔥 Create Load</button>
+    <button class="relax" onclick="stopStress()">❄️ Reduce Load</button>
+</div>
+
+<p id="status">Status: Idle</p>
+
+<footer>
+    Powered by Jenkins • Docker • Kubernetes • HPA
+</footer>
+
+<script>
+let stressInterval;
+
+function startStress() {
+    document.getElementById("status").innerText = "Status: Generating CPU Load...";
+    stressInterval = setInterval(() => {
+        for (let i = 0; i < 100000000; i++) {
+            Math.sqrt(Math.random());
+        }
+    }, 10);
+}
+
+function stopStress() {
+    document.getElementById("status").innerText = "Status: Load Reduced";
+    clearInterval(stressInterval);
+}
+</script>
+
+</body>
+</html>
